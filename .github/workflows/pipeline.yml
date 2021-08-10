@@ -1,4 +1,4 @@
-name: Fluel Tests
+name: Flugel Tests
 on: push
 jobs:
   go-tests:
@@ -10,6 +10,8 @@ jobs:
         with:
           go-version: 1.16
       - uses: hashicorp/setup-terraform@v1.2.1
+        with:
+          terraform_wrapper: false
       - name: Download Go Modules
         working-directory: test
         run: go mod download
