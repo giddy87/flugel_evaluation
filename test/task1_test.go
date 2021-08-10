@@ -34,16 +34,5 @@ instanceTags := aws.GetTagsForEc2Instance(t, awsRegion, instanceID)
 	assert.True(t, containsFlugelNameTag)
 	assert.Equal(t, "Flugel", testingTag)
 
-	// Verify that our expected name tag is one of the tags
-//	nameTag, containsNameTag := instanceTags["Name"]
-//	assert.True(t, containsNameTag)
-//	assert.Equal(t, expectedName, nameTag)instanceTags := aws.GetTagsForEc2Instance(t, awsRegion, instanceID)
-
-
-// tags := terraform.OutputMap(t, terraformOptions,"tags")
-// assert.Contains(t, tags, "Name: Flugel")
-// assert.Contains(t, tags, "Owner: InfraTeam")
-
-
 
 }

@@ -15,8 +15,8 @@ jobs:
         run: go mod download
       - name: Run Go Tests for Task1
         working-directory: test
-        run: go test -v -run TestTask1Plan
-#        run: go test -v -run TestTagsValidation
+#        run: go test -v -run TestTask1Plan
+        run: go test -v -run TestTagsValidation
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
