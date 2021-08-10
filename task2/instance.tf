@@ -10,9 +10,9 @@ vpc_security_group_ids = [aws_security_group.flugel_private_sg.id]
 
 
 tags = {
-	Name = "Squid"
+	Name = "Flugel"
 	Instance_details = "flugel_web_server_${count.index +1}" 
 	Owner = "InfraTeam"
-        Role = "Cluster"
+        Role = "node"
 }
 }
