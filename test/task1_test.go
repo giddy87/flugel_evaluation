@@ -1,0 +1,39 @@
+package terraform
+
+import  (
+	"testing"
+	"github.com/stretchr/testify/assert"
+        "github.com/gruntwork-io/terratest/modules/terraform"
+        "github.com/gruntwork-io/terratest/modules/aws"
+
+)
+
+func TestTask1Plan(t *testing.T) {
+         terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+		TerraformDir: "../task1",
+	})
+         terraform.InitAndPlan(t, terraformOptions)
+}
+
+
+func TestTagsValidation(t *testing.T) {
+terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
+                TerraformDir: "../task1",
+        })
+
+//Clean up after Tests
+ defer terraform.Destroy(t, terraformOptions)
+ terraform.InitAndApply(t, terraformOptions)
+awsRegion := "us-east-2"
+instanceID := terraform.Output(t, terraformOptions, "instance_id")
+
+instanceTags := aws.GetTagsForEc2Instance(t, awsRegion, instanceID)
+
+
+	testingTag, containsFlugelNameTag := instanceTags["Name"]
+	assert.True(t, containsFlugelNameTag)
+	assert.Equal(t, "Flugel", testingTag)
+
+
+
+}

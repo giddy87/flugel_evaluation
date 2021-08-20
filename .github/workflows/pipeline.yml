@@ -1,0 +1,25 @@
+name: Flugel Tests
+on: push
+jobs:
+  go-tests:
+    name: Testing Flugel application Infrastructure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-go@v2.1.3
+        with:
+          go-version: 1.16
+      - uses: hashicorp/setup-terraform@v1.2.1
+        with:
+          terraform_wrapper: false
+      - name: Download Go Modules
+        working-directory: test
+        run: go mod download
+      - name: Run Go Tests for Task1
+        working-directory: test
+#        run: go test -v -run TestTask1Plan
+        run: go test -v -run TestTagsValidation
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+          AWS_DEFAULT_REGION:  ${{ secrets.REGION }}
