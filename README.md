@@ -11,7 +11,7 @@ Infrastructure as Code Task:
 # task 1
 
 Provisioning an EC2 instance and s3 bucket with tags **Name=Flugel, Owner=InfraTeam**.
-The terraform scripts are [here](https://github.com/giddy87/flugel_test/blob/main/task1)
+The terraform scripts are [here](https://github.com/giddy87/flugel_evaluation/blob/tree/task1/task1)
 
 The aws provider is used and hence AWS credentials must be set as variables in addition to other variables required for the build.
 
@@ -28,7 +28,7 @@ For this relatively lean build, the resources being provisioned are 1 EC2 instan
 # task 2
 Provisioning an EC2 instance and s3 bucket with tags **Name=Flugel, Owner=InfraTeam**.
 Provisioning a cluster of 2 EC2 instances behind an ALB running Nginx, serving a static file generated using a Python script. and the underlying infrastructure - Networks, igw, security groups, 
-The terraform scripts are [here](https://github.com/giddy87/flugel_test/blob/main/task2)
+The terraform scripts are [here](https://github.com/giddy87/flugel_evaluation/blob/tree/task2/task2)
 | Variables | DEFAULT |
 |--|--|
 | AWS_SECRET_ACCESS_KEY |  ''|
@@ -47,13 +47,13 @@ The terraform scripts are [here](https://github.com/giddy87/flugel_test/blob/mai
 The tests are written in the test\ directory .
 The entire tests consists of 4 functions:
 
-[TestTask1Plan](https://github.com/giddy87/flugel_test/blob/main/test/task1_test.go) : This test initializes terraform and plans the Infrastructure for task 1, while failing if error.
+[TestTask1Plan](https://github.com/giddy87/flugel_evaluation/blob/main/test/task1_test.go) : This test initializes terraform and plans the Infrastructure for task 1, while failing if error.
 
-[TestTagsValidation](https://github.com/giddy87/flugel_test/blob/main/test/task1_test.go): This test applies(deploys) the Iac scripts, checks that the provisioned resources have tags that match the conditions and then deletes all resources after test completion.
+[TestTagsValidation](https://github.com/giddy87/flugel_evaluation/blob/tree/task1/test/task1_test.go): This test applies(deploys) the Iac scripts, checks that the provisioned resources have tags that match the conditions and then deletes all resources after test completion.
 
-[TestTask2Plan:](https://github.com/giddy87/flugel_test/blob/main/test/task2_test.go)  This test initializes terraform and plans the Infrastructure for task 2, while failing if error.
+[TestTask2Plan:](https://github.com/giddy87/flugel_evaluation/blob/tree/task2/test/task2_test.go)  This test initializes terraform and plans the Infrastructure for task 2, while failing if error.
 
-[TestTask2ApplicationReachability](https://github.com/giddy87/flugel_test/blob/main/test/task2_test.go): This test deploys the ALB and two instance cluster, underlying resources such as Vpc, Subnet (Public and Private), ALB target group, IGW, NAT, Routes, Security Groups etc.
+[TestTask2ApplicationReachability](https://github.com/giddy87/flugel_evaluation/blob/tree/task2/test/task2_test.go): This test deploys the ALB and two instance cluster, underlying resources such as Vpc, Subnet (Public and Private), ALB target group, IGW, NAT, Routes, Security Groups etc.
 This then checks the if the Static Website is Available from the dns name generated upon deployment.
 Finally this tasks deletes all provisioned resources upon test completion. 
 
@@ -63,8 +63,8 @@ To Validate the entire Infrastructure, using Terratest:
 
     cd test\
     go test -v
-**[Using Github actions](https://github.com/giddy87/flugel_test/actions)**:
-The pipeline yaml file is accessible [here](https://github.com/giddy87/flugel_test/blob/main/.github/workflows/pipeline.yml)
+**[Using Github actions](https://github.com/giddy87/flugel_evaluation/actions)**:
+The pipeline yaml file is accessible [here](https://github.com/giddy87/flugel_evaluation/blob/tree/task2/.github/workflows/pipeline.yml)
 Before building, AWS Credential keys must be setup as secrets (Repo > Settings > Secrets). 
 ```
 
